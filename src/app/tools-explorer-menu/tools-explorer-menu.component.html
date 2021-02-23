@@ -1,0 +1,10 @@
+
+<pg-tabset tabAnimation="slide-left" Type="fillup" ShowPagination="true">
+  <pg-tab *ngFor="let tab of currentMenu">
+    <ng-template #TabHeading>
+      {{tab.name}}
+    </ng-template>
+    <div class="row column-seperation">
+    </div>
+  </pg-tab>
+</pg-tabset>

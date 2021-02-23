@@ -1,0 +1,206 @@
+<!-- WRAP LAYOUT IF BOXED -->
+<div class="container" *ngIf="_boxed; else basicLayoutBlock">
+	<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+</div>
+<ng-template #basicLayoutBlock>
+	<ng-container *ngTemplateOutlet="contentTpl"></ng-container> 
+</ng-template>
+
+<ng-template #contentTpl>
+	<!-- PAGE SIDEBAR -->
+	<pg-sidebar>
+		<ng-template #sideBarOverlay>
+			<!-- Favorites       -->
+		</ng-template>
+		<ng-template #sideBarHeader>
+			<img src="assets/img/logo_white.png" alt="logo" class="brand" pgRetina src1x="assets/img/logo_white.png" src2x="assets/img/logo_white_2x.png">
+			<div class="sidebar-header-controls">
+				<button type="button" class="btn btn-xs sidebar-slide-toggle btn-link m-l-20 hidden-md-down" [class.active]="_menuDrawerOpen" (click)="toggleMenuDrawer()"><i class="fa fa-angle-down fs-16"></i>
+				</button>
+				<button type="button" class="btn btn-link d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none" data-toggle-pin="sidebar" (click)="toggleMenuPin()"><i class="fa fs-12"></i>
+				</button>
+			</div>
+		</ng-template>
+		<ng-template #menuItems>
+			<pg-menu-items [Items]="menuLinks">
+			</pg-menu-items>
+		</ng-template>
+	</pg-sidebar>
+	<!-- PAGE CONTAINER -->
+	<page-container>	
+		<pg-header [boxed]="_boxed">
+			<!-- START MOBILE SIDEBAR TOGGLE -->
+			<a href="javascript:void(0);" class="btn-link toggle-sidebar d-lg-none pg pg-menu" (click)="toggleMobileSidebar()"></a>
+			<!-- END MOBILE SIDEBAR TOGGLE -->
+			<div class="">
+				<div class="brand inline" [class.d-none]="_layoutOption === 'email'">
+					<img src="assets/img/logo.png" alt="logo" pgRetina src1x="assets/img/logo.png" src2x="assets/img/logo_2x.png">
+				</div>
+				<!-- START NOTIFICATION LIST -->
+				<ul class="d-lg-inline-block d-none notification-list no-margin d-lg-inline-block b-grey b-l b-r no-style p-l-30 p-r-20">
+					<li class="p-r-20 inline">
+					<div class="dropdown" dropdown>
+						<a href="javascript:;" id="notification-center" class="header-icon pg pg-world" dropdownToggle>
+						<span class="bubble"></span>
+						</a>
+						<!-- START Notification Dropdown -->
+						<div *dropdownMenu class="dropdown-menu notification-toggle">
+						<!-- START Notification -->
+						<div class="notification-panel">
+							<!-- START Notification Body-->
+							<div class="notification-body scrollable">
+							<!-- START Notification Item-->
+							<div class="notification-item unread clearfix">
+								<!-- START Notification Item-->
+								<div class="heading open">
+									<a href="javascript:void(0)" class="text-complete pull-left">
+										<i class="pg pg-map fs-16 m-r-10"></i>
+										<span class="bold">Kaduna AOI</span>
+										<span class="fs-12 m-l-10"> - Data Request</span>
+									</a>
+									<div class="pull-right">
+										<div class="thumbnail-wrapper d16 circular inline m-t-15 m-r-10 toggle-more-details">
+										<div><i class="fa fa-angle-left"></i>
+										</div>
+										</div>
+										<span class=" time">few sec ago</span>
+									</div>
+									<div class="more-details">
+										<div class="more-details-inner">
+										<h5 class="semi-bold fs-16">Data Search Completed. Download in progress</h5>
+										<p class="small hint-text">
+											78%
+										</p>
+										</div>
+									</div>
+								</div>
+								<!-- END Notification Item-->
+								<!-- START Notification Item Right Side-->
+								<div class="option" tooltip="mark as read" placement="right">
+									<a href="javascript:void(0)" class="mark"></a>
+								</div>
+								<!-- END Notification Item Right Side-->
+							</div>
+							<!-- START Notification Body-->
+							<!-- START Notification Item-->
+							<div class="notification-item  clearfix">
+								<div class="heading">
+									<a href="javascript:void(0)" class="text-danger pull-left">
+										<i class="fa fa-exclamation-triangle m-r-10"></i>
+										<span class="bold"> Pansharpening </span>
+										<span class="fs-12 m-l-10"> - Processing Request</span>
+									</a>
+									<span class="pull-right time">2 mins ago</span>
+								</div>
+								<!-- START Notification Item Right Side-->
+								<div class="option">
+									<a href="javascript:void(0)" class="mark"></a>
+								</div>
+								<!-- END Notification Item Right Side-->
+							</div>
+							<!-- END Notification Item-->
+							<!-- START Notification Item-->
+							<div class="notification-item  clearfix">
+								<div class="heading">
+									<a href="javascript:void(0)" class="text-warning-dark pull-left">
+										<i class="fa fa-exclamation-triangle m-r-10"></i>
+										<span class="bold">Nigeria Population, 2019</span>
+										<span class="fs-12 m-l-10"> - Data Upload</span>
+									</a>
+									<span class="pull-right time">yesterday</span>
+								</div>
+								<!-- START Notification Item Right Side-->
+								<div class="option">
+									<a href="javascript:void(0)" class="mark"></a>
+								</div>
+								<!-- END Notification Item Right Side-->
+							</div>
+							<!-- END Notification Item-->
+							</div>
+							<!-- END Notification Body-->
+							<!-- START Notification Footer-->
+							<div class="notification-footer text-center">
+							<a href="javascript:void(0)" class="">View all offline jobs</a>
+							<a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="javascript:void(0)">
+								<i class="pg pg-refresh_new"></i>
+							</a>
+							</div>
+							<!-- START Notification Footer-->
+						</div>
+						<!-- END Notification -->
+						</div>
+						<!-- END Notification Dropdown -->
+					</div>
+					</li>
+					<li class="p-l-10 inline" (click)="toggleToolsExplorerMenu()" *ngIf="currentToolsExplorerMenu">
+						<a href="javascript:;">
+							<i *ngIf="currentToolsExplorerMenu.iconType" [ngClass]="[currentToolsExplorerMenu.iconType, currentToolsExplorerMenu.iconType+'-'+currentToolsExplorerMenu.iconName]"></i>
+							{{currentToolsExplorerMenu.label}} 
+							<i class="fa fa-chevron-down" *ngIf="!showToolsExplorerMenu"></i>
+							<i class="fa fa-chevron-up" *ngIf="showToolsExplorerMenu"></i>
+						</a>
+					</li>
+				</ul>
+				<!-- END NOTIFICATIONS LIST -->
+				<a href="javascript:void(0)" class="search-link d-lg-inline-block d-none" (click)="openSearch($event)"><i class="pg pg-search"></i>Type anywhere to <span class="bold">search</span></a>
+			</div>
+			<div class="d-flex align-items-center">
+				<!-- START User Info-->
+				<div class="pull-left p-r-10 fs-14 font-heading d-lg-block d-none">
+				<span class="semi-bold">Samuel Adeshina</span>
+				</div>
+				<div class="dropdown pull-right d-lg-block d-none" dropdown>
+					<button class="profile-dropdown-toggle" type="button" dropdownToggle id="profil	eDropdown">
+						<span class="thumbnail-wrapper d32 circular inline">
+						<img src="assets/img/profiles/avatar.jpg" alt="" pgRetina src1x="assets/img/profiles/avatar.jpg" src2x="assets/img/profiles/avatar_small2x.jpg" width="32" height="32">
+						</span>
+					</button>
+					<div class="dropdown-menu dropdown-menu-right profile-dropdown" *dropdownMenu role="menu">
+						<a href="javascript:void(0)" class="dropdown-item"><i class="fs-13 pg pg-settings_small"></i> Settings</a>
+						<a href="javascript:void(0)" class="dropdown-item"><i class="fs-13 pg pg-outdent"></i> Feedback</a>
+						<a href="javascript:void(0)" class="dropdown-item"><i class="fs-13 pg pg-signals"></i> Help</a>
+						<a href="javascript:void(0)" class="clearfix bg-master-lighter dropdown-item">
+						<span class="pull-left">Logout</span>
+						<span class="pull-right"><i class="fs-13 pg pg-power"></i></span>
+						</a>
+					</div>
+				</div>
+				<!-- END User Info-->
+				<a href="javascript:void(0)" class="header-icon pg pg-alt_menu btn-link m-l-10 sm-no-margin d-inline-block" (click)="openQuickView($event)"></a>
+			</div>   
+		</pg-header>
+		<div class="page-content-wrapper {{_pageContainerClass}} full-height">
+			
+			<!-- START PAGE CONTENT -->
+			<div class="content {{_contentClass}} full-height">
+				<app-tools-explorer-menu *ngIf="currentToolsExplorerMenu && showToolsExplorerMenu"></app-tools-explorer-menu>
+				<router-outlet></router-outlet>
+			</div>
+			<!-- END PAGE CONTENT -->
+			<!-- START COPYRIGHT -->
+			<ng-template [ngIf]="_footer">
+				<div class=" container-fluid container-fixed-lg footer">
+					<div class="copyright sm-text-center">
+						<p class="small no-margin pull-left sm-pull-reset">
+							<span class="hint-text">Copyright &copy; 2021</span> <span class="font-montserrat"> SkyLab</span>. <span class="hint-text">All rights
+							reserved.</span> <span class="sm-block"><a class="m-l-10 m-r-10" href="javascript:void(0)">Terms of use</a> <span class="muted">|</span> <a class=
+							"m-l-10" href="javascript:void(0)">Privacy Policy</a></span>
+						</p>
+		
+						<p class="small no-margin pull-right sm-pull-reset">
+							<span class="hint-text">Geospatial Intelligence &amp; Data Analysis Dashboard</span>
+						</p>
+		
+						<div class="clearfix">
+						</div>
+					</div>
+				</div>
+				<!-- END COPYRIGHT -->
+			</ng-template>
+		</div>
+	</page-container>
+	<!-- QUICKSEARCH -->
+	<app-search-overlay></app-search-overlay>
+	<!-- QUICKVIEW -->
+	<app-quickview></app-quickview>
+</ng-template>

@@ -1,0 +1,190 @@
+<div class="overlay" [class.hide]=!isVisible [@fadeAnimation]="isVisible">
+	<!-- BEGIN Overlay Content !-->
+
+	<div class="overlay-content has-results m-t-20">
+		<!-- BEGIN Overlay Header !-->
+
+		<div class="container-fluid">
+			<!-- BEGIN Overlay Logo !-->
+			<img alt="logo" class="overlay-brand" pgRetina src1x="assets/img/logo.png" src2x="assets/img/logo_2x.png" src=
+			"assets/img/logo.png"> <!-- END Overlay Logo !-->
+			 <!-- BEGIN Overlay Close !-->
+			 <a class="close-icon-light overlay-close text-black fs-16" href="javascript:void(0)" (click)="close($event)"><i class="pg pg-close"></i></a> <!-- END Overlay Close !-->
+		</div>
+		<!-- END Overlay Header !-->
+
+		<div class="container-fluid">
+			<!-- BEGIN Overlay Controls !-->
+			<input autocomplete="off" #searchField (keyup)="searchKeyPress($event)" class="no-border overlay-search bg-transparent" [(ngModel)]="value" placeholder="Search..." spellcheck=
+			"false"><br>
+
+			<div class="inline-block">
+				<div class="checkbox right">
+					<input checked="checked" id="checkboxn" type="checkbox" value="1"> <label for="checkboxn"><i class="fa fa-search"></i> Specify temporal dimension</label>
+				</div>
+			</div>
+
+			<div class="inline-block m-l-10">
+				<p class="fs-13">
+					Press enter to search
+				</p>
+			</div>
+			<!-- END Overlay Controls !-->
+		</div>
+		<!-- BEGIN Overlay Search Results, This part is for demo purpose, you can add anything you like !-->
+
+		<div class="container-fluid">
+			<div class="search-results m-t-40">
+				
+				<div class="row">
+
+					<div class="col-md-4">
+						<p class="bold">
+							Search Filter
+						</p>
+		
+						<!-- BEGIN Search Result Item !-->
+
+						<div class="">
+							<!-- BEGIN Search Result Item Thumbnail !-->
+
+							<div class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10">
+								<div>
+									<i class="fa fa-file-image-o large-text"></i>
+								</div>
+							</div>
+							<!-- END Search Result Item Thumbnail !-->
+
+							<div class="p-l-10 inline p-t-5">
+								<h5 class="m-b-5">
+									<span class="semi-bold result-name">Geolocation</span> 
+								</h5>
+
+								<p class="hint-text">
+									Coordinates / Place Name
+								</p>
+							</div>
+						</div>
+						<!-- END Search Result Item !-->
+						
+						<!-- BEGIN Search Result Item !-->
+
+						<div class="">
+							<!-- BEGIN Search Result Item Thumbnail !-->
+
+							<div class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10">
+								<div>
+									<i class="fa fa-file-image-o large-text"></i>
+								</div>
+							</div>
+							<!-- END Search Result Item Thumbnail !-->
+
+							<div class="p-l-10 inline p-t-5">
+								<h5 class="m-b-5">
+									<span class="semi-bold result-name">Imagery</span> 
+								</h5>
+
+								<p class="hint-text">
+									Geospatial Tools
+								</p>
+							</div>
+						</div>
+						<!-- END Search Result Item !-->
+						<!-- BEGIN Search Result Item !-->
+
+						<div class="">
+							<!-- BEGIN Search Result Item Thumbnail !-->
+
+							<div class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10">
+								<div>
+									<i class="fa fa-map-marker large-text"></i>
+								</div>
+							</div>
+							<!-- END Search Result Item Thumbnail !-->
+
+							<div class="p-l-10 inline p-t-5">
+								<h5 class="m-b-5">
+									<span class="semi-bold result-name">Vector Data</span> 
+								</h5>
+
+								<p class="hint-text">
+									Geospatial Tools
+								</p>
+							</div>
+						</div>
+						<!-- END Search Result Item !-->
+						<!-- BEGIN Search Result Item !-->
+
+						<div class="">
+							<!-- BEGIN Search Result Item Thumbnail !-->
+
+							<div class="thumbnail-wrapper d48 circular bg-complete text-white inline m-t-10">
+								<div>
+									<i class="fa fa-table large-text"></i>
+								</div>
+							</div>
+							<!-- END Search Result Item Thumbnail !-->
+
+							<div class="p-l-10 inline p-t-5">
+								<h5 class="m-b-5">
+									<span class="semi-bold result-name">Other Data Sources</span>
+								</h5>
+
+								<p class="hint-text">
+									via Data Fusion
+								</p>
+							</div>
+						</div>
+						<!-- END Search Result Item !-->
+						<!-- BEGIN Search Result Item !-->
+
+						<div class="">
+							<!-- BEGIN Search Result Item Thumbnail !-->
+
+							<div class="thumbnail-wrapper d48 circular text-white bg-danger inline m-t-10">
+								<div>
+									<i class="pg pg-form large-text"></i>
+								</div>
+							</div>
+							<!-- END Search Result Item Thumbnail !-->
+
+							<div class="p-l-10 inline p-t-5">
+								<h5 class="m-b-5">
+									<span class="semi-bold result-name">Past Reports</span>
+								</h5>
+
+								<p class="hint-text">
+									via Reports
+								</p>
+							</div>
+						</div>
+						<!-- END Search Result Item !-->
+					</div>
+					<div class="col-md-8">
+						<p class="bold">
+							Showing {{suggestions.length}} Results 
+						</p>
+						<!-- BEGIN Search Result Item !-->
+						<div class="suggestions-box">
+							<div *ngFor="let suggestion of suggestions; index as i">
+								<div class="p-l-10 inline p-t-5" (click)="displaySearchResult(suggestion.address, 'Search Result: ' + suggestion.attributes.Type + ' in ' + suggestion.attributes.Country, suggestion.location, suggestion.extent)">
+									<h5 class="m-b-5">
+										<span class="bold result-name">{{suggestion.address}}</span>
+									</h5>
+
+									<p class="hint-text">
+										<span class="text-black semi-bold">{{suggestion.attributes.Addr_type}}</span>: {{suggestion.attributes.Type}} in {{suggestion.attributes.Country}} <span *ngIf="suggestion.attributes.Place_Addr">({{suggestion.attributes.Place_Addr}})</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- END Search Result Item !-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Overlay Search Results !-->
+	</div>
+	<!-- END Overlay Content !-->
+</div>
+<!-- END OVERLAY -->

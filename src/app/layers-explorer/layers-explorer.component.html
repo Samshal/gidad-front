@@ -1,0 +1,81 @@
+<div class="full-height d-flex flex-column">
+  <div class="navbar navbar-default navbar-sm">
+    <div class="navbar-inner">
+      <a href="javascript:;" class="inline action p-l-10 link text-master" data-navigate="view" data-view-port="#" data-view-animation="push-parrallax">
+        <i class="pg pg-more"></i>
+      </a>
+      <div class="view-heading">
+        Layers View
+      </div>
+      <a href="javascript:void(0)" class="inline action p-r-10 pull-right link text-master">
+        <i class="pg pg-search"></i>
+      </a>
+    </div>
+  </div>
+  <div perfectScrollbar class="full-height list-view boreded no-top-border">
+    <div class="list-view-group-container">
+      <div class="list-view-group-header text-uppercase">
+        Raster Layers
+      </div>
+      <ul>
+        <li class="list">
+          <a href="javascript:;" class="align-items-center" data-navigate="view" data-view-port="#" data-view-animation="push-parrallax">
+            <div class="gallery-item">
+              <!-- START PREVIEW -->
+              <img src="assets/img/imagery_thumb.jpg" alt="" class="image-responsive-height">
+              <!-- END PREVIEW -->
+              <!-- START ITEM OVERLAY DESCRIPTION -->
+              <div class="overlayer bottom-left full-width">
+                <div class="overlayer-wrapper item-info ">
+                  <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
+                    <div class="">
+                      <p class="pull-left bold text-white fs-14 p-t-10">01 January, 2021</p>
+                      <h5 class="pull-right semi-bold text-white bold">0.00 %</h5>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="m-t-10">
+                      <div class="inline m-l-10">
+                        <p class="no-margin text-white fs-12">Sentinel-2A Imagery</p>
+                        <p class="no-margin text-white fs-12">10m spatial resolution</p>
+                        
+                      </div>
+                      <div class="pull-right m-t-10">
+                        <button class="btn btn-white btn-xs btn-mini bold fs-14" type="button"><i class="fa fa-info text-info"></i></button>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- END PRODUCT OVERLAY DESCRIPTION -->
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="list-view-group-container">
+      <div class="list-view-group-header text-uppercase">
+        Vector Layers
+      </div>
+      <pg-list-view-container class="scrollable full-height">
+        <pg-list-item>
+          <li class="chat-user-list clearfix" *ngFor="let layer of layers | keyvalue">
+            <div>
+                <div class="">
+                  <p class="text-master">
+                    <span>{{layer.value.name}}</span> 
+                  </p>
+                  <span class="block text-master hint-text fs-12">{{layer.value.desc}}</span>
+                  <div class="form-check form-check-inline">
+                    <input type="checkbox" [(ngModel)]="layer.value.state" (change)="toggleLayer(layer.key, layer.value.state)">
+                    <span class="p-l-10"><a href="#" (click)="removeLayer(layer.key)"><i class="fa fa-times text-danger"></i></a></span>
+                  </div>
+                </div>
+              </div>
+            </li>
+        </pg-list-item>
+    </pg-list-view-container>
+    </div>
+  </div>
+</div>
