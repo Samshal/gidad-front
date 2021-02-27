@@ -11,6 +11,7 @@ import { EventPublisherService } from '../event-publisher.service';
 export class ToolsExplorerMenuComponent implements OnInit {
 
   currentMenu;
+  currentOperation = {};
   layers = {};
   explorerMenus = {
     "Vector Analysis":[
@@ -145,22 +146,21 @@ export class ToolsExplorerMenuComponent implements OnInit {
 
   loadToolsExplorerMenu(menu){
     this.currentMenu = this.explorerMenus[menu.label]
-    console.log(this.currentMenu)
   }
 
   retrieveLayers(_layers){
-    JSON.parse(_layers).forEach(element => {
+    _layers.forEach(element => {
       if (!(element in this.layers)){
         const layer = JSON.parse(this.layersService.getLayer(element).value)
-        this.layers[layer.id] = JSON.parse(layer)
+        this.layers[layer.id] = layer
       }
     });
   }
 
   loadFunction(data){
+    this.currentOperation = data;
     const _layers = this.layersService.getLayers().value
-    this.retrieveLayers(_layers)
-    console.log(this.layers)
+    this.retrieveLayers(JSON.parse(_layers))
   }
   
 }
