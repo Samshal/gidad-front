@@ -1,10 +1,28 @@
 
-<pg-tabset tabAnimation="slide-left" Type="fillup" ShowPagination="true">
+<pg-tabset tabAnimation="slide-left" Type="fillup" ShowPagination="true" style="padding-top: 0 !important">
   <pg-tab *ngFor="let tab of currentMenu">
     <ng-template #TabHeading>
       {{tab.name}}
     </ng-template>
     <div class="row column-seperation">
+      <div class="col-md-2" style="margin:0 !important; padding:0 !important; height:300px">
+        <input type="text" placeholder="Search" class="form-control" [(ngModel)]="filterValue"/>
+        <pg-list-view-container class="scrollable" [perfectScrollbar]="config">
+          <pg-list-item>
+              <li class="chat-user-list clearfix"  *ngFor="let function of tab.functions | search:'title, description':filterValue">
+                <a data-toggle="tooltip" title="{{function.description}}" (click)="loadFunction(function)">
+                  <p>
+                    <span class="text-master">{{function.title}}</span>
+                    <!-- <span class="block text-master hint-text fs-12">{{function.description}}</span> -->
+                  </p>
+                </a>
+              </li>
+          </pg-list-item>
+        </pg-list-view-container>
+      </div>
+      <div class="col-md-10" style="height: 300px; border-left: 2px solid #e6e6e6 !important">
+        Hello
+      </div>
     </div>
   </pg-tab>
 </pg-tabset>

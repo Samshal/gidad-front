@@ -16,8 +16,8 @@ export class LayersService {
   }
   
   public addLayer(layerObject) {
-    this.storageService.setItem(layerObject.name, JSON.stringify(layerObject));
-    this.updateLayers(layerObject.name, "add");
+    this.storageService.setItem(layerObject.id, JSON.stringify(layerObject));
+    this.updateLayers(layerObject.id, "add");
   }
 
   public getLayers() {

@@ -63,6 +63,7 @@ import { BlankCasualComponent } from './@pages/layouts/blank-casual/blank-casual
 import { MapWorkspaceComponent } from './map-workspace/map-workspace.component';
 import { LayersExplorerComponent } from './layers-explorer/layers-explorer.component';
 import { ToolsExplorerMenuComponent } from './tools-explorer-menu/tools-explorer-menu.component';
+import { SearchPipe } from './search.pipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -95,6 +96,7 @@ export class AppHammerConfig extends HammerGestureConfig  {
     MapWorkspaceComponent,
     LayersExplorerComponent,
     ToolsExplorerMenuComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

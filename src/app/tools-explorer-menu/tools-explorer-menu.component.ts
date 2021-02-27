@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LayersService } from '../layers.service'
 import { EventPublisherService } from '../event-publisher.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { EventPublisherService } from '../event-publisher.service';
 export class ToolsExplorerMenuComponent implements OnInit {
 
   currentMenu;
+  layers = {};
   explorerMenus = {
     "Vector Analysis":[
       {
@@ -17,7 +19,16 @@ export class ToolsExplorerMenuComponent implements OnInit {
         "functions":[
           {
             "title":"Along",
-            "description":"Takes a LineString and returns a Point at a specified distance along the line."
+            "description":"Takes a LineString and returns a Point at a specified distance along the line.",
+            "options":{
+              "input":{
+                "LineString":1
+              },
+              "output":{
+                "Point":1
+              },
+              "plot":true
+            }
           },
           {
             "title":"Area",
@@ -66,7 +77,45 @@ export class ToolsExplorerMenuComponent implements OnInit {
         ]
       },
       {
-        "name":"Transformation"
+        "name":"Transformation",
+        "functions":[
+          {
+            "title":"Bounding Box Clip",
+            "description":"Takes a Feature and a bbox and clips the feature to the bbox using lineclip. May result in degenerate edges when clipping Polygons."
+          },
+          {
+            "title":"Buffer",
+            "description":"Calculates a buffer for input features for a given radius. Units supported are miles, kilometers, and degrees."
+          },
+          {
+            "title":"Circle",
+            "description":"Takes a Point and calculates the circle polygon given a radius in degrees, radians, miles, or kilometers; and steps for precision."
+          },
+          {
+            "title":"Concave",
+            "description":"Takes a set of points and returns a concave hull Polygon or MultiPolygon."
+          },
+          {
+            "title":"Convex",
+            "description":"Takes a Feature or a FeatureCollection and returns a convex hull Polygon."
+          },
+          {
+            "title":"Difference",
+            "description":"Finds the difference between two polygons by clipping the second polygon from the first."
+          },
+          {
+            "title":"Intersect",
+            "description":"Takes two polygon or multi-polygon geometries and finds their polygonal intersection. If they don't intersect, returns null."
+          },
+          {
+            "title":"Union",
+            "description":"Takes two (Multi)Polygon(s) and returns a combined polygon. If the input polygons are not contiguous, this function returns a MultiPolygon feature."
+          },
+          {
+            "title":"Voronoi",
+            "description":"Takes a FeatureCollection of points, and a bounding box, and returns a FeatureCollection of Voronoi polygons."
+          }
+        ]
       },
       {
         "name":"Feature Conversion"
@@ -88,7 +137,7 @@ export class ToolsExplorerMenuComponent implements OnInit {
       }
     ]
   }
-  constructor(public events: EventPublisherService) { }
+  constructor(public events: EventPublisherService, public layersService: LayersService) { }
 
   ngOnInit() {
     this.events.getEvents("currentToolsExplorerMenu").subscribe(response => this.loadToolsExplorerMenu(JSON.parse(response)))
@@ -99,4 +148,19 @@ export class ToolsExplorerMenuComponent implements OnInit {
     console.log(this.currentMenu)
   }
 
+  retrieveLayers(_layers){
+    JSON.parse(_layers).forEach(element => {
+      if (!(element in this.layers)){
+        const layer = JSON.parse(this.layersService.getLayer(element).value)
+        this.layers[layer.id] = JSON.parse(layer)
+      }
+    });
+  }
+
+  loadFunction(data){
+    const _layers = this.layersService.getLayers().value
+    this.retrieveLayers(_layers)
+    console.log(this.layers)
+  }
+  
 }

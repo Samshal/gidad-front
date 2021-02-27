@@ -252,8 +252,6 @@ export class MapWorkspaceComponent implements OnInit {
       "layer": geoJson
     }
 
-    console.log(layer);
-
     this.events.publishEvent("addVectorLayerToDataExplorer", JSON.stringify(vector_layer))
   }
 }

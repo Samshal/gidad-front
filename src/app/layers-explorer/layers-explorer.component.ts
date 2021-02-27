@@ -18,6 +18,7 @@ export class LayersExplorerComponent implements OnInit {
   
   layer;
   layers = {
+    
   }
 
   toggleLayer(object_name, state) {
@@ -30,14 +31,14 @@ export class LayersExplorerComponent implements OnInit {
   }
 
   addLayer(name, desc, object){
+    const id = Date.now();
     const layer = {
       "name":name,
       "layer":object,
       "desc":desc,
-      "state":true
+      "state":true,
+      "id":id
     }
-    
-    const id = Date.now()
     this.layers[id] = layer;
     this.toggleLayer(id, true)
   }
