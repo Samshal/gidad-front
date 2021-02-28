@@ -23,14 +23,13 @@
       <div class="col-md-10" style="height: 300px; border-left: 2px solid #e6e6e6 !important">
         <div class="row">
           <div class="col-md-12">
-            <h3>{{currentOperation.title}} <small><span data-toggle="tooltip" title="{{currentOperation.description}}"><i class="fa fa-info-circle text-info"> </i></span></small></h3>
+            <h3>{{currentOperation.title}} <small><span data-toggle="tooltip" title="{{currentOperation.description}}"><i class="fa fa-info-circle text-info text-small"> </i></span></small></h3>
           </div>
-          <div class="col-md-4">
-            <p>Data Area</p>
-          </div>
-          <div class="col-md-8">
-            <p>Map Area</p>
-          </div>
+          <ng-container [ngSwitch]="currentOperation.component">
+            <div class="container">
+              <app-vector-along data="{{stringify(currentOperation)}}" *ngSwitchCase="'app-vector-along'"></app-vector-along>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>

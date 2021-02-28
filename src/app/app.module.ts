@@ -55,6 +55,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
+import { AlgorithmsModule } from './algorithms/algorithms.module';
 
 //Sample Blank Pages - Optional
 import { BlankCorporateComponent } from './@pages/layouts/blank-corporate/blank-corporate.component';
@@ -126,7 +127,8 @@ export class AppHammerConfig extends HammerGestureConfig  {
     pgSwitchModule,
     QuillModule,
     LeafletModule,
-    LeafletDrawModule
+    LeafletDrawModule,
+    AlgorithmsModule
   ],
   providers: [QuickviewService,pagesToggleService,{
     provide: PERFECT_SCROLLBAR_CONFIG,

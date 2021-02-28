@@ -29,7 +29,8 @@ export class ToolsExplorerMenuComponent implements OnInit {
                 "Point":1
               },
               "plot":true
-            }
+            },
+            "component":"app-vector-along"
           },
           {
             "title":"Area",
@@ -149,18 +150,22 @@ export class ToolsExplorerMenuComponent implements OnInit {
   }
 
   retrieveLayers(_layers){
-    _layers.forEach(element => {
-      if (!(element in this.layers)){
-        const layer = JSON.parse(this.layersService.getLayer(element).value)
-        this.layers[layer.id] = layer
-      }
-    });
+    // _layers.forEach(element => {
+    //   if (!(element in this.layers)){
+    //     const layer = JSON.parse(this.layersService.getLayer(element).value)
+    //     this.layers[layer.id] = layer
+    //   }
+    // });
   }
 
   loadFunction(data){
     this.currentOperation = data;
-    const _layers = this.layersService.getLayers().value
-    this.retrieveLayers(JSON.parse(_layers))
+    // const _layers = this.layersService.getLayers().value
+    // this.retrieveLayers(JSON.parse(_layers))
+  }
+
+  stringify(data){
+    return JSON.stringify(data);
   }
   
 }
