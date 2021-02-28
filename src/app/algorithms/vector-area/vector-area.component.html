@@ -15,12 +15,6 @@
     </pg-select>
   </div>
   <p class="p-2">Specify Options</p>
-  <div>
-    <div class="form-group form-group-default required " pgFormGroupDefault>
-        <label>Distance</label>
-        <input type="number" class="form-control" required [(ngModel)]="computeData['distance']">
-    </div>
-  </div>
   <div class="p-2">
     <pg-select style="width: 100%;" [PlaceHolder]="'Units'" [(ngModel)]="computeData['units']">
         <pg-option

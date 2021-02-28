@@ -34,7 +34,17 @@ export class ToolsExplorerMenuComponent implements OnInit {
           },
           {
             "title":"Area",
-            "description":"Takes one or more features and returns their area in square meters."
+            "description":"Takes one or more features and returns their area in square meters.",
+            "options":{
+              "input":{
+                "Polygon":1
+              },
+              "output":{
+                "Text":1
+              },
+              "plot":false
+            },
+            "component":"app-vector-area"
           },
           {
             "title":"Bounding Box",
@@ -164,8 +174,8 @@ export class ToolsExplorerMenuComponent implements OnInit {
     // this.retrieveLayers(JSON.parse(_layers))
   }
 
-  stringify(data){
-    return JSON.stringify(data);
-  }
+  // stringify(data){
+  //   return JSON.stringify(data);
+  // }
   
 }

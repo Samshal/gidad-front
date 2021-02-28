@@ -6,11 +6,11 @@ import * as turf from '@turf/turf';
 import  * as L from 'leaflet';
 
 @Component({
-  selector: 'app-vector-along',
-  templateUrl: './vector-along.component.html',
-  styleUrls: ['./vector-along.component.scss']
+  selector: 'app-vector-area',
+  templateUrl: './vector-area.component.html',
+  styleUrls: ['./vector-area.component.scss']
 })
-export class VectorAlongComponent implements OnInit {
+export class VectorAreaComponent implements OnInit {
 
   @Input()
   data;
@@ -21,7 +21,7 @@ export class VectorAlongComponent implements OnInit {
   layers = {}
   dataSelectors = {};
 
-  allowedUnits = ["kilometers", "degrees", "radians", "miles"];
+  allowedUnits = ["square kilometer", "square meter"];
 
   baseLayers = {};
   constructor(public layersService: LayersService) {
@@ -72,30 +72,17 @@ export class VectorAlongComponent implements OnInit {
   }
 
   performComputation(){
-    const line = turf.lineString(this.computeData["LineString_0"].layer.geometry.coordinates);
-    const distance = this.computeData["distance"];
+    const polygon = turf.polygon(this.computeData["Polygon_0"].layer.geometry.coordinates);
     const units = this.computeData["units"];
     
-    const along = turf.along(line, distance, {
-      "units":units
-    });
+    var area = turf.area(polygon);
 
-    this.map.addLayer(L.geoJSON(this.computeData["LineString_0"].layer));
-    this.map.addLayer(L.geoJSON(along, {
-      pointToLayer: function(feature, latlng) {
-        var smallIcon = L.icon({
-          iconSize: [ 25, 41 ],
-          iconAnchor: [ 13, 41 ],
-          iconUrl: 'assets/img/leaflet/marker-icon.png',
-          shadowUrl: 'assets/img/leaflet/marker-shadow.png'
-        })
-        return L.marker(latlng, {icon: smallIcon});
-      },
-      style: {
-        fill: false
-      }
-    }).bindTooltip(distance+" "+units+" Along"));
-    this.map.fitBounds(L.geoJSON(along).getBounds())
+    if (units == "square kilometer"){
+      area = area / 1000000;
+    }
+
+    this.map.addLayer(L.geoJSON(this.computeData["Polygon_0"].layer).bindPopup("Area: "+area+" "+units).openPopup());
+    this.map.fitBounds(L.geoJSON(this.computeData["Polygon_0"].layer).getBounds())
   }
 
   public map: L.Map = null;

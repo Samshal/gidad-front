@@ -5,7 +5,7 @@
       {{tab.name}}
     </ng-template>
     <div class="row column-seperation">
-      <div class="col-md-2" style="margin:0 !important; padding:0 !important; height:300px">
+      <div class="col-md-2" style="margin:0 !important; padding:0 !important; height:350px;">
         <input type="text" placeholder="Search" class="form-control" [(ngModel)]="filterValue"/>
         <pg-list-view-container class="scrollable" [perfectScrollbar]="config">
           <pg-list-item>
@@ -20,14 +20,15 @@
           </pg-list-item>
         </pg-list-view-container>
       </div>
-      <div class="col-md-10" style="height: 300px; border-left: 2px solid #e6e6e6 !important">
+      <div class="col-md-10" style="height: 350px; border-left: 2px solid #e6e6e6 !important; overflow-y: auto;">
         <div class="row">
           <div class="col-md-12">
-            <h3>{{currentOperation.title}} <small><span data-toggle="tooltip" title="{{currentOperation.description}}"><i class="fa fa-info-circle text-info text-small"> </i></span></small></h3>
+            <h4 data-toggle="tooltip" title="{{currentOperation.description}}">{{currentOperation.title}}</h4>
           </div>
           <ng-container [ngSwitch]="currentOperation.component">
             <div class="container">
-              <app-vector-along data="{{stringify(currentOperation)}}" *ngSwitchCase="'app-vector-along'"></app-vector-along>
+              <app-vector-along data="{{currentOperation | json}}" *ngSwitchCase="'app-vector-along'"></app-vector-along>
+              <app-vector-area data="{{currentOperation | json}}" *ngSwitchCase="'app-vector-area'"></app-vector-area>
             </div>
           </ng-container>
         </div>

@@ -48,6 +48,7 @@ import {BsDropdownModule,
 import { pgTabsModule } from './@pages/components/tabs/tabs.module';
 import { pgSwitchModule } from './@pages/components/switch/switch.module';
 import { ProgressModule } from './@pages/components/progress/progress.module';
+import { pgSelectModule} from './@pages/components/select/select.module';
 
 //Thirdparty Components / Plugins - Optional
 import { QuillModule } from 'ngx-quill';
@@ -125,6 +126,7 @@ export class AppHammerConfig extends HammerGestureConfig  {
     pgTabsModule,
     PerfectScrollbarModule,
     pgSwitchModule,
+    pgSelectModule,
     QuillModule,
     LeafletModule,
     LeafletDrawModule,
